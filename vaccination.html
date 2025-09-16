@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccination Guide - Shusrut AI Health Assistant</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="apple-touch-icon" href="logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #06b6d4;
+            --accent-color: #10b981;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --medical-green: #10b981;
+            --medical-blue: #3b82f6;
+            --health-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #10b981 100%);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #38bdf8;
+            --secondary-color: #22d3ee;
+            --accent-color: #34d399;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --medical-green: #34d399;
+            --medical-blue: #60a5fa;
+            --health-gradient: linear-gradient(135deg, #38bdf8 0%, #22d3ee 50%, #34d399 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="medical" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="%2310b981" opacity="0.1"/><path d="M15 20h10M20 15v10" stroke="%230ea5e9" stroke-width="0.8" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(%23medical)"/></svg>');
+            min-height: 100vh;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--health-gradient);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 4px 15px rgba(255, 255, 255, 0.2),
+                0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .brand-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-info p {
+            font-size: 15px;
+            opacity: 0.95;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-track {
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .toggle-thumb {
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .light-icon {
+            color: #f59e0b;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .dark-icon {
+            color: #6366f1;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="dark"] .toggle-thumb {
+            transform: translateX(28px);
+        }
+
+        [data-theme="dark"] .light-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .dark-icon {
+            opacity: 1;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--health-gradient);
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            background: var(--health-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .vaccination-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .age-group {
+            background: var(--bg-primary);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .age-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--health-gradient);
+        }
+
+        .age-group:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .age-header {
+            background: var(--bg-secondary);
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .age-icon {
+            font-size: 28px;
+            width: 50px;
+            height: 50px;
+            background: var(--health-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .age-header h3 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .vaccine-list {
+            padding: 20px 25px;
+        }
+
+        .vaccine-item {
+            color: var(--text-secondary);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .vaccine-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .vaccine-item strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .info-section {
+            background: var(--bg-primary);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-top: 30px;
+        }
+
+        .info-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list li i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .warning-section {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        [data-theme="dark"] .warning-section {
+            background: linear-gradient(135deg, #451a03, #78350f);
+            border-color: #d97706;
+        }
+
+        .warning-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .warning-icon {
+            color: #d97706;
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .warning-text {
+            color: #92400e;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        [data-theme="dark"] .warning-text {
+            color: #fbbf24;
+        }
+
+        .warning-text strong {
+            color: #78350f;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .warning-text strong {
+            color: #fed7aa;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .nav-controls {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .vaccination-sections {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .age-header {
+                padding: 15px 20px;
+            }
+
+            .vaccine-list {
+                padding: 15px 20px;
+            }
+
+            .warning-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="logo.svg" alt="Shusrut AI Logo" class="logo-image">
+                </div>
+                <div class="brand-info">
+                    <h1>Vaccination Guide</h1>
+                    <p>Comprehensive vaccination information and guidance</p>
+                </div>
+            </div>
+            <div class="nav-controls">
+                <div class="theme-toggle" onclick="toggleTheme()">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fas fa-sun light-icon"></i>
+                            <i class="fas fa-moon dark-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="index.htm" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Chat
+                </a>
+            </div>
+        </header>
+
+        <div class="content">
+            <h1 class="page-title">Vaccination Information Center</h1>
+            <p class="subtitle">Stay protected with up-to-date vaccination information and schedules</p>
+
+            <div class="vaccination-sections">
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">🍼</div>
+                        <h3>At Birth</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>BCG:</strong> Protects against Tuberculosis (TB).
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Hepatitis B (1st dose):</strong> Prevents Hepatitis B (liver infection).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">👶</div>
+                        <h3>6 Weeks – 6 Months</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>DPT (3 doses):</strong> Diphtheria, Pertussis (Whooping Cough), Tetanus.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Polio (3 doses):</strong> Prevents Polio (paralysis).
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Hib (3 doses):</strong> Prevents Meningitis, Pneumonia.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Rotavirus (2 doses):</strong> Prevents severe Diarrhea.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>PCV (3 doses):</strong> Pneumonia, Meningitis, Sepsis.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Hepatitis B (2nd & 3rd dose):</strong> Liver infection prevention.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">👦</div>
+                        <h3>9–12 Months</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>MMR (1st dose):</strong> Measles, Mumps, Rubella.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Varicella (1st dose):</strong> Chickenpox.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Hepatitis A (1st dose):</strong> Liver infection prevention.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">👧</div>
+                        <h3>16–24 Months</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>DPT, Polio Boosters</strong>
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>MMR (2nd dose)</strong>
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Varicella (2nd dose)</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">🏫</div>
+                        <h3>5–6 Years</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>DPT Booster</strong>
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Polio Booster</strong>
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>MMR (if missed earlier)</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">🧑</div>
+                        <h3>10–16 Years</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>Tdap Booster:</strong> Tetanus, Diphtheria, Pertussis.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>HPV (2 doses):</strong> Cervical & other cancers prevention.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Meningococcal Vaccine:</strong> Meningitis prevention.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">🧓</div>
+                        <h3>Adults (≥18 Years)</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>Td Booster:</strong> Every 10 years (Tetanus, Diphtheria).
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Influenza Vaccine:</strong> Annual flu prevention.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Hepatitis B:</strong> If not completed earlier.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">👴</div>
+                        <h3>Older Adults (≥60 Years)</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>Pneumococcal Vaccine:</strong> Pneumonia, Meningitis prevention.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Shingles Vaccine:</strong> Prevents shingles and complications.
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Influenza Vaccine:</strong> Annual flu prevention.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-header">
+                        <div class="age-icon">🤰</div>
+                        <h3>Pregnant Women</h3>
+                    </div>
+                    <div class="vaccine-list">
+                        <div class="vaccine-item">
+                            <strong>Tdap Vaccine:</strong> Protects mother and newborn (given in every pregnancy).
+                        </div>
+                        <div class="vaccine-item">
+                            <strong>Influenza Vaccine:</strong> Prevents maternal & infant flu risk.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2 class="info-title">
+                    <i class="fas fa-info-circle"></i>
+                    Important Vaccination Guidelines
+                </h2>
+                <ul class="info-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Consult with healthcare providers before getting any vaccination
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Keep vaccination records updated and easily accessible
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Follow recommended vaccination schedules for optimal protection
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Report any adverse reactions to healthcare providers immediately
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Stay informed about vaccine updates and new recommendations
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Consider vaccination needs before traveling internationally
+                    </li>
+                </ul>
+            </div>
+
+            <div class="warning-section">
+                <div class="warning-content">
+                    <i class="fas fa-exclamation-triangle warning-icon"></i>
+                    <div class="warning-text">
+                        <strong>Important Notice:</strong> Vaccination schedules may vary by region and individual health conditions. 
+                        Consult a qualified healthcare provider for personalized advice.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Initialize theme from localStorage or default to light
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+        });
+    </script>
+</body>
+</html>

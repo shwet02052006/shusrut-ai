@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shusrut AI - Your Health Companion</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="apple-touch-icon" href="logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="logo.svg" alt="Shusrut AI Logo" class="logo-image">
+                </div>
+                <div class="brand-info">
+                    <h1>Shusrut AI</h1>
+                    <p>Your Intelligent Health Companion</p>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <nav class="nav-links">
+                    <a href="vaccination.html" class="nav-link" target="_blank">
+                        <i class="fas fa-syringe"></i>
+                        Vaccination Guide
+                    </a>
+                </nav>
+                
+                <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="fas fa-sun light-icon"></i>
+                            <i class="fas fa-moon dark-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="welcome-card">
+                    <h3>Welcome to Shusrut AI</h3>
+                    <p>Your trusted AI health assistant, ready to help with medical queries and health guidance.</p>
+                </div>
+
+                <div class="feature-list">
+                    <h4>What I can help with:</h4>
+                    <div class="feature-item clickable" onclick="promptFeature('Symptom Assessment', 'I need help with symptom assessment', 'stethoscope')">
+                        <i class="fas fa-stethoscope"></i>
+                        <span>Symptom Assessment</span>
+                    </div>
+                    <div class="feature-item clickable" onclick="promptFeature('Medication Information', 'I need information about medications', 'pills')">
+                        <i class="fas fa-pills"></i>
+                        <span>Medication Information</span>
+                    </div>
+                    <div class="feature-item clickable" onclick="promptFeature('Health Tips', 'I would like some health tips', 'heart')">
+                        <i class="fas fa-heart"></i>
+                        <span>Health Tips</span>
+                    </div>
+                    <div class="feature-item clickable" onclick="promptFeature('Appointment Reminders', 'I need help with appointment reminders', 'calendar-check')">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Appointment Reminders</span>
+                    </div>
+                    <div class="feature-item clickable" onclick="promptFeature('Health Tracking', 'I want to track my health data', 'chart-line')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Health Tracking</span>
+                    </div>
+                    <div class="feature-item clickable" onclick="promptFeature('Medical Education', 'I need medical education resources', 'book-medical')">
+                        <i class="fas fa-book-medical"></i>
+                        <span>Medical Education</span>
+                    </div>
+                    <div class="feature-item clickable" onclick="window.open('vaccination.html', '_blank')">
+                        <i class="fas fa-syringe"></i>
+                        <span>Vaccination Guide</span>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-info">
+                        <div class="chat-avatar">
+                            <img src="logo.svg" alt="Shusrut AI" class="avatar-logo">
+                        </div>
+                        <div class="chat-details">
+                            <h3>Shusrut AI Assistant</h3>
+                            <p>AI-powered health guidance • Always available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="iframe-wrapper">
+                    <div class="loading-overlay">
+                        <div class="loader"></div>
+                        <div class="loading-text">Initializing Shusrut AI...</div>
+                    </div>
+                    <iframe
+                        class="chatbot-iframe"
+                        src="https://www.chatbase.co/chatbot-iframe/iT8h76s7yFN9yvBFueM5t"
+                        frameborder="0"
+                        title="Shusrut AI Health Assistant">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Add smooth transition
+            document.documentElement.style.transition = 'all 0.3s ease';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Remove transition after animation completes
+            setTimeout(() => {
+                document.documentElement.style.transition = '';
+            }, 300);
+        }
+
+        // Initialize theme from localStorage or default to light
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Generic function to prompt any feature in the chatbot
+        function promptFeature(featureName, promptText, iconClass) {
+            const iframe = document.querySelector('.chatbot-iframe');
+            if (iframe && iframe.contentWindow) {
+                // Try to send a message to the iframe
+                try {
+                    // Focus on the iframe first
+                    iframe.focus();
+                    
+                    // Show the prompt overlay
+                    setTimeout(() => {
+                        showFeaturePrompt(featureName, promptText, iconClass);
+                    }, 100);
+                } catch (error) {
+                    console.log('Direct iframe interaction not available, showing prompt instead');
+                    showFeaturePrompt(featureName, promptText, iconClass);
+                }
+            }
+        }
+
+        function showFeaturePrompt(featureName, promptText, iconClass) {
+            // Create a temporary prompt overlay
+            const promptOverlay = document.createElement('div');
+            promptOverlay.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #0ea5e9, #06b6d4, #10b981);
+                color: white;
+                padding: 28px 36px;
+                border-radius: 16px;
+                box-shadow: 
+                    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                z-index: 1000;
+                text-align: center;
+                animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                max-width: 420px;
+                backdrop-filter: blur(10px);
+            `;
+            
+            promptOverlay.innerHTML = `
+                <div style="font-size: 20px; font-weight: 600; margin-bottom: 14px; letter-spacing: -0.3px;">
+                    <i class="fas fa-${iconClass}" style="margin-right: 10px; font-size: 18px;"></i>
+                    ${featureName} Requested
+                </div>
+                <div style="font-size: 15px; opacity: 0.95; margin-bottom: 20px; line-height: 1.4; font-weight: 400;">
+                    Please type: "<strong>${promptText}</strong>" in the chat below
+                </div>
+                <button onclick="this.parentElement.remove()" 
+                        style="background: rgba(255,255,255,0.25); border: none; color: white; 
+                               padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 500;
+                               transition: all 0.2s ease; backdrop-filter: blur(5px);"
+                        onmouseover="this.style.background='rgba(255,255,255,0.35)'"
+                        onmouseout="this.style.background='rgba(255,255,255,0.25)'">
+                    Got it!
+                </button>
+            `;
+            
+            // Add CSS animation if not already added
+            if (!document.querySelector('#slideInAnimation')) {
+                const style = document.createElement('style');
+                style.id = 'slideInAnimation';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { opacity: 0; transform: translate(-50%, -60%); }
+                        to { opacity: 1; transform: translate(-50%, -50%); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(promptOverlay);
+            
+            // Auto-remove after 6 seconds
+            setTimeout(() => {
+                if (promptOverlay.parentElement) {
+                    promptOverlay.remove();
+                }
+            }, 6000);
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme
+            initTheme();
+            
+            // All feature items are now clickable and use CSS hover effects
+            // No need for additional JavaScript hover animations
+
+            // Simulate loading completion
+            setTimeout(() => {
+                const loadingOverlay = document.querySelector('.loading-overlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.opacity = '0';
+                    loadingOverlay.style.visibility = 'hidden';
+                }
+            }, 3000);
+
+            // Add a subtle typing indicator animation
+            let typingDots = 0;
+            setInterval(() => {
+                const statusText = document.querySelector('.status-indicator span');
+                if (statusText && Math.random() > 0.7) {
+                    const dots = '.'.repeat((typingDots % 3) + 1);
+                    statusText.textContent = `Thinking${dots}`;
+                    typingDots++;
+                    setTimeout(() => {
+                        statusText.textContent = 'Online';
+                    }, 1500);
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
