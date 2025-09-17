@@ -111,7 +111,6 @@ body {
     justify-content: center;
     font-size: 28px;
     color: white;
-    animation: pulse 2s infinite;
     box-shadow: 
         0 4px 15px rgba(0, 0, 0, 0.15),
         0 2px 8px rgba(0, 0, 0, 0.1);
@@ -429,15 +428,9 @@ body {
     justify-content: center;
     color: white;
     font-weight: 600;
-    animation: rotateAvatar 4s linear infinite;
     box-shadow: 0 3px 6px var(--shadow-color);
     font-size: 18px;
     overflow: hidden;
-}
-
-@keyframes rotateAvatar {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 .chat-details h3 {

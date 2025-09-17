@@ -8,7 +8,734 @@
     <link rel="apple-touch-icon" href="logo.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #06b6d4;
+            --accent-color: #10b981;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --medical-green: #10b981;
+            --medical-blue: #3b82f6;
+            --health-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #10b981 100%);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #38bdf8;
+            --secondary-color: #22d3ee;
+            --accent-color: #34d399;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --medical-green: #34d399;
+            --medical-blue: #60a5fa;
+            --health-gradient: linear-gradient(135deg, #38bdf8 0%, #22d3ee 50%, #34d399 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="medical" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="%2310b981" opacity="0.1"/><path d="M15 20h10M20 15v10" stroke="%230ea5e9" stroke-width="0.8" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(%23medical)"/></svg>');
+            min-height: 100vh;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--health-gradient);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 4px 15px rgba(255, 255, 255, 0.2),
+                0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-info p {
+            font-size: 15px;
+            opacity: 0.95;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-link i {
+            font-size: 16px;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-track {
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .toggle-thumb {
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .light-icon {
+            color: #f59e0b;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .dark-icon {
+            color: #6366f1;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="dark"] .toggle-thumb {
+            transform: translateX(28px);
+        }
+
+        [data-theme="dark"] .light-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .dark-icon {
+            opacity: 1;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+        }
+
+        .sidebar {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .sidebar {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            height: fit-content;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--health-gradient);
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .welcome-card {
+            margin-bottom: 30px;
+        }
+
+        .welcome-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            background: var(--health-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .feature-list h4 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list h4::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--health-gradient);
+            border-radius: 4px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: var(--bg-primary);
+        }
+
+        .feature-item:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .feature-item i {
+            color: var(--primary-color);
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .feature-item span {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        /* What Can I Help Section */
+        .help-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+
+        .help-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--health-gradient);
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .help-section h2 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            background: var(--health-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .help-section .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .capability-card {
+            background: var(--bg-primary);
+            padding: 25px 20px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .capability-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .capability-card:hover::before {
+            left: 100%;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15);
+        }
+
+        .capability-card i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .capability-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .capability-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .chat-prompt {
+            text-align: center;
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
+            border-radius: 12px;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        .chat-prompt h3 {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .chat-prompt p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 18px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
+            background: var(--bg-secondary);
+        }
+
+        .service-card i {
+            color: var(--primary-color);
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .service-card span {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Main Chat Section */
+        .main-chat-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-chat-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: var(--health-gradient);
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        .main-chat-header {
+            background: var(--bg-primary);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .main-chat-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .main-chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--health-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .main-chat-avatar img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+
+        .main-chat-details h3 {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .main-chat-details p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .main-iframe-wrapper {
+            position: relative;
+            height: 500px;
+        }
+
+        .main-chatbot-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .main-loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .header-controls {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .sidebar {
+                padding: 20px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .nav-link {
+                justify-content: center;
+                padding: 12px 20px;
+            }
+
+            .help-section {
+                padding: 30px 20px;
+            }
+
+            .help-section h2 {
+                font-size: 24px;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .capability-card {
+                padding: 20px 15px;
+            }
+
+            .capability-card i {
+                font-size: 35px;
+            }
+
+            .main-iframe-wrapper {
+                height: 400px;
+            }
+
+            .main-chat-header {
+                padding: 15px 20px;
+            }
+
+            .main-chat-details h3 {
+                font-size: 18px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .service-card {
+                padding: 12px 15px;
+            }
+
+            .service-card i {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -29,6 +756,22 @@
                         <i class="fas fa-syringe"></i>
                         Vaccination Guide
                     </a>
+                    <a href="health-tests.html" class="nav-link" target="_blank">
+                        <i class="fas fa-vial"></i>
+                        Health Tests
+                    </a>
+                    <a href="diet-guidelines.html" class="nav-link" target="_blank">
+                        <i class="fas fa-apple-alt"></i>
+                        Diet Guidelines
+                    </a>
+                    <a href="smoking-alcohol-risks.html" class="nav-link" target="_blank">
+                        <i class="fas fa-smoking-ban"></i>
+                        Risks & Prevention
+                    </a>
+                    <a href="hygiene-practices.html" class="nav-link" target="_blank">
+                        <i class="fas fa-hands-wash"></i>
+                        Hygiene Practices
+                    </a>
                 </nav>
                 
                 <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
@@ -47,73 +790,99 @@
             </div>
         </header>
 
-        <div class="main-content">
-            <aside class="sidebar">
-                <div class="welcome-card">
-                    <h3>Welcome to Shusrut AI</h3>
-                    <p>Your trusted AI health assistant, ready to help with medical queries and health guidance.</p>
-                </div>
-
-                <div class="feature-list">
-                    <h4>What I can help with:</h4>
-                    <div class="feature-item clickable" onclick="promptFeature('Symptom Assessment', 'I need help with symptom assessment', 'stethoscope')">
-                        <i class="fas fa-stethoscope"></i>
-                        <span>Symptom Assessment</span>
+        <!-- Main Chat Section -->
+        <section class="main-chat-section">
+            <div class="main-chat-header">
+                <div class="main-chat-info">
+                    <div class="main-chat-avatar">
+                        <img src="logo.svg" alt="Shusrut AI" class="avatar-logo">
                     </div>
-                    <div class="feature-item clickable" onclick="promptFeature('Medication Information', 'I need information about medications', 'pills')">
-                        <i class="fas fa-pills"></i>
-                        <span>Medication Information</span>
+                    <div class="main-chat-details">
+                        <h3>Chat with Shusrut AI</h3>
+                        <p>Get instant health guidance and medical information • Always available</p>
                     </div>
-                    <div class="feature-item clickable" onclick="promptFeature('Health Tips', 'I would like some health tips', 'heart')">
-                        <i class="fas fa-heart"></i>
-                        <span>Health Tips</span>
-                    </div>
-                    <div class="feature-item clickable" onclick="promptFeature('Appointment Reminders', 'I need help with appointment reminders', 'calendar-check')">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Appointment Reminders</span>
-                    </div>
-                    <div class="feature-item clickable" onclick="promptFeature('Health Tracking', 'I want to track my health data', 'chart-line')">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Health Tracking</span>
-                    </div>
-                    <div class="feature-item clickable" onclick="promptFeature('Medical Education', 'I need medical education resources', 'book-medical')">
-                        <i class="fas fa-book-medical"></i>
-                        <span>Medical Education</span>
-                    </div>
-                    <div class="feature-item clickable" onclick="window.open('vaccination.html', '_blank')">
-                        <i class="fas fa-syringe"></i>
-                        <span>Vaccination Guide</span>
-                    </div>
-                </div>
-            </aside>
-
-            <div class="chat-container">
-                <div class="chat-header">
-                    <div class="chat-info">
-                        <div class="chat-avatar">
-                            <img src="logo.svg" alt="Shusrut AI" class="avatar-logo">
-                        </div>
-                        <div class="chat-details">
-                            <h3>Shusrut AI Assistant</h3>
-                            <p>AI-powered health guidance • Always available</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="iframe-wrapper">
-                    <div class="loading-overlay">
-                        <div class="loader"></div>
-                        <div class="loading-text">Initializing Shusrut AI...</div>
-                    </div>
-                    <iframe
-                        class="chatbot-iframe"
-                        src="https://www.chatbase.co/chatbot-iframe/iT8h76s7yFN9yvBFueM5t"
-                        frameborder="0"
-                        title="Shusrut AI Health Assistant">
-                    </iframe>
                 </div>
             </div>
-        </div>
+
+            <div class="main-iframe-wrapper">
+                <div class="main-loading-overlay">
+                    <div class="loader"></div>
+                    <div class="loading-text">Connecting to Shusrut AI...</div>
+                </div>
+                <iframe
+                    class="main-chatbot-iframe"
+                    src="https://www.chatbase.co/chatbot-iframe/iT8h76s7yFN9yvBFueM5t"
+                    frameborder="0"
+                    title="Shusrut AI Health Assistant">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- What Can I Help Section -->
+        <section class="help-section">
+            <h2>What I can help with:</h2>
+            
+            <div class="services-grid">
+                <!-- Hyperlink items (Health Pages) - First Priority -->
+                <div class="service-card" onclick="window.open('vaccination.html', '_blank')">
+                    <i class="fas fa-syringe"></i>
+                    <span>Vaccination Guide</span>
+                </div>
+                
+                <div class="service-card" onclick="window.open('health-tests.html', '_blank')">
+                    <i class="fas fa-vial"></i>
+                    <span>Health Tests</span>
+                </div>
+                
+                <div class="service-card" onclick="window.open('diet-guidelines.html', '_blank')">
+                    <i class="fas fa-apple-alt"></i>
+                    <span>Diet Guidelines</span>
+                </div>
+                
+                <div class="service-card" onclick="window.open('smoking-alcohol-risks.html', '_blank')">
+                    <i class="fas fa-smoking-ban"></i>
+                    <span>Risks & Prevention</span>
+                </div>
+                
+                <div class="service-card" onclick="window.open('hygiene-practices.html', '_blank')">
+                    <i class="fas fa-hands-wash"></i>
+                    <span>Hygiene Practices</span>
+                </div>
+                
+                <!-- AI Prompt items - Second Priority -->
+                <div class="service-card" onclick="promptFeature('Symptom Assessment', 'I need help with symptom assessment', 'stethoscope')">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>Symptom Assessment</span>
+                </div>
+                
+                <div class="service-card" onclick="promptFeature('Medication Information', 'I need information about medications', 'pills')">
+                    <i class="fas fa-pills"></i>
+                    <span>Medication Information</span>
+                </div>
+                
+                <div class="service-card" onclick="promptFeature('Health Tips', 'I would like some health tips', 'heart')">
+                    <i class="fas fa-heart"></i>
+                    <span>Health Tips</span>
+                </div>
+                
+                <div class="service-card" onclick="promptFeature('Appointment Reminders', 'I need help with appointment reminders', 'calendar-check')">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointment Reminders</span>
+                </div>
+                
+                <div class="service-card" onclick="promptFeature('Health Tracking', 'I want to track my health data', 'chart-line')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Health Tracking</span>
+                </div>
+                
+                <div class="service-card" onclick="promptFeature('Medical Education', 'I need medical education resources', 'book-medical')">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Medical Education</span>
+                </div>
+            </div>
+        </section>
+
+
     </div>
 
     <script>
@@ -141,7 +910,7 @@
 
         // Generic function to prompt any feature in the chatbot
         function promptFeature(featureName, promptText, iconClass) {
-            const iframe = document.querySelector('.chatbot-iframe');
+            const iframe = document.querySelector('.main-chatbot-iframe');
             if (iframe && iframe.contentWindow) {
                 // Try to send a message to the iframe
                 try {
@@ -232,10 +1001,10 @@
 
             // Simulate loading completion
             setTimeout(() => {
-                const loadingOverlay = document.querySelector('.loading-overlay');
-                if (loadingOverlay) {
-                    loadingOverlay.style.opacity = '0';
-                    loadingOverlay.style.visibility = 'hidden';
+                const mainLoadingOverlay = document.querySelector('.main-loading-overlay');
+                if (mainLoadingOverlay) {
+                    mainLoadingOverlay.style.opacity = '0';
+                    mainLoadingOverlay.style.visibility = 'hidden';
                 }
             }, 3000);
 

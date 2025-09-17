@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaccination Guide - Shusrut AI Health Assistant</title>
+    <title>Hygiene Practices - Shusrut AI Health Assistant</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="apple-touch-icon" href="logo.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -241,14 +241,14 @@
             font-weight: 400;
         }
 
-        .vaccination-sections {
+        .info-grid, .vaccination-sections {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
-        .age-group {
+        .info-card, .age-group {
             background: var(--bg-primary);
             border-radius: 16px;
             border: 1px solid var(--border-color);
@@ -257,7 +257,7 @@
             position: relative;
         }
 
-        .age-group::before {
+        .info-card::before, .age-group::before {
             content: '';
             position: absolute;
             top: 0;
@@ -267,7 +267,7 @@
             background: var(--health-gradient);
         }
 
-        .age-group:hover {
+        .info-card:hover, .age-group:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px var(--shadow-color);
         }
@@ -300,11 +300,11 @@
             margin: 0;
         }
 
-        .vaccine-list {
+        .info-content, .vaccine-list {
             padding: 20px 25px;
         }
 
-        .vaccine-item {
+        .info-item, .vaccine-item {
             color: var(--text-secondary);
             padding: 12px 0;
             border-bottom: 1px solid var(--border-color);
@@ -312,12 +312,12 @@
             font-size: 15px;
         }
 
-        .vaccine-item:last-child {
+        .info-item:last-child, .vaccine-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
 
-        .vaccine-item strong {
+        .info-item strong, .vaccine-item strong {
             color: var(--text-primary);
             font-weight: 600;
         }
@@ -428,7 +428,7 @@
                 padding: 25px;
             }
 
-            .vaccination-sections {
+            .info-grid, .vaccination-sections {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -437,7 +437,7 @@
                 padding: 15px 20px;
             }
 
-            .vaccine-list {
+            .info-content, .vaccine-list {
                 padding: 15px 20px;
             }
 
@@ -454,11 +454,11 @@
         <header class="header">
             <div class="logo-section">
                 <div class="logo">
-                    <img src="logo.svg" alt="Shusrut AI Logo">
+                    <img src="logo.svg" alt="Shusrut AI Logo" class="logo-image">
                 </div>
                 <div class="brand-info">
-                    <h1>Vaccination Guide</h1>
-                    <p>Comprehensive vaccination information and guidance</p>
+                    <h1>Hygiene Practices</h1>
+                    <p>Essential hygiene and cleanliness guidelines</p>
                 </div>
             </div>
             <div class="nav-controls">
@@ -478,171 +478,216 @@
         </header>
 
         <div class="content">
-            <h1 class="page-title">Vaccination Information Center</h1>
-            <p class="subtitle">Stay protected with up-to-date vaccination information and schedules</p>
+            <h1 class="page-title">Essential Hygiene Practices</h1>
+            <p class="subtitle">Fundamental cleanliness habits for optimal health and disease prevention</p>
 
-            <div class="vaccination-sections">
-                <div class="age-group">
+            <div class="info-grid">
+                <!-- Hand Hygiene -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🍼</div>
-                        <h3>At Birth</h3>
+                        <h3><i class="fas fa-hands-wash"></i> Hand Hygiene</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>BCG:</strong> Protects against Tuberculosis (TB).
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Proper Handwashing Technique</h4>
+                            <p><strong>Duration:</strong> Wash for at least 20 seconds</p>
+                            <p><strong>Steps:</strong> Wet, lather, scrub, rinse, dry</p>
+                            <p><strong>Areas:</strong> Palms, backs, between fingers, under nails</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis B (1st dose):</strong> Prevents Hepatitis B (liver infection).
+                        <div class="test-item">
+                            <h4>When to Wash Hands</h4>
+                            <p><strong>Before:</strong> Eating, cooking, touching face</p>
+                            <p><strong>After:</strong> Using bathroom, coughing/sneezing, touching surfaces</p>
+                            <p><strong>Important times:</strong> After handling money, pets, garbage</p>
+                        </div>
+                        <div class="test-item">
+                            <h4>Hand Sanitizer Guidelines</h4>
+                            <p><strong>Alcohol content:</strong> At least 60% alcohol</p>
+                            <p><strong>Amount:</strong> Enough to cover all hand surfaces</p>
+                            <p><strong>When to use:</strong> When soap and water unavailable</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Personal Hygiene -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👶</div>
-                        <h3>6 Weeks – 6 Months</h3>
+                        <h3><i class="fas fa-shower"></i> Personal Hygiene</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>DPT (3 doses):</strong> Diphtheria, Pertussis (Whooping Cough), Tetanus.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Daily Bathing/Showering</h4>
+                            <p><strong>Frequency:</strong> Daily or every other day minimum</p>
+                            <p><strong>Water temperature:</strong> Warm (not too hot)</p>
+                            <p><strong>Focus areas:</strong> Armpits, groin, feet, hair</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Polio (3 doses):</strong> Prevents Polio (paralysis).
+                        <div class="test-item">
+                            <h4>Hair Care</h4>
+                            <p><strong>Washing:</strong> 2-3 times per week (varies by hair type)</p>
+                            <p><strong>Products:</strong> Use appropriate shampoo for hair type</p>
+                            <p><strong>Scalp health:</strong> Massage gently, rinse thoroughly</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Hib (3 doses):</strong> Prevents Meningitis, Pneumonia.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Rotavirus (2 doses):</strong> Prevents severe Diarrhea.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>PCV (3 doses):</strong> Pneumonia, Meningitis, Sepsis.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis B (2nd & 3rd dose):</strong> Liver infection prevention.
+                        <div class="test-item">
+                            <h4>Deodorant/Antiperspirant</h4>
+                            <p><strong>Application:</strong> Apply to clean, dry skin</p>
+                            <p><strong>Timing:</strong> Best applied at night for antiperspirants</p>
+                            <p><strong>Natural alternatives:</strong> Baking soda-based options available</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Oral Hygiene -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👦</div>
-                        <h3>9–12 Months</h3>
+                        <h3><i class="fas fa-tooth"></i> Oral Hygiene</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>MMR (1st dose):</strong> Measles, Mumps, Rubella.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Brushing Teeth</h4>
+                            <p><strong>Frequency:</strong> Twice daily, morning and before bed</p>
+                            <p><strong>Duration:</strong> 2 minutes minimum</p>
+                            <p><strong>Technique:</strong> Gentle circular motions, 45-degree angle</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Varicella (1st dose):</strong> Chickenpox.
+                        <div class="test-item">
+                            <h4>Flossing</h4>
+                            <p><strong>Frequency:</strong> Daily</p>
+                            <p><strong>Technique:</strong> Gentle up and down motion between teeth</p>
+                            <p><strong>Benefits:</strong> Removes plaque, prevents gum disease</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis A (1st dose):</strong> Liver infection prevention.
+                        <div class="test-item">
+                            <h4>Mouthwash & Additional Care</h4>
+                            <p><strong>Mouthwash:</strong> Use after brushing and flossing</p>
+                            <p><strong>Tongue cleaning:</strong> Brush or scrape tongue daily</p>
+                            <p><strong>Dental visits:</strong> Every 6 months for checkups</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Clothing & Laundry -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👧</div>
-                        <h3>16–24 Months</h3>
+                        <h3><i class="fas fa-tshirt"></i> Clothing & Laundry</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>DPT, Polio Boosters</strong>
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Clean Clothing Guidelines</h4>
+                            <p><strong>Underwear:</strong> Change daily</p>
+                            <p><strong>Socks:</strong> Change daily, more if sweaty</p>
+                            <p><strong>Shirts:</strong> Change after sweating or wearing all day</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>MMR (2nd dose)</strong>
+                        <div class="test-item">
+                            <h4>Laundry Best Practices</h4>
+                            <p><strong>Hot water:</strong> For whites and heavily soiled items</p>
+                            <p><strong>Cold water:</strong> For colors and delicates</p>
+                            <p><strong>Drying:</strong> Completely dry clothes to prevent mold</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Varicella (2nd dose)</strong>
+                        <div class="test-item">
+                            <h4>Special Considerations</h4>
+                            <p><strong>Exercise clothes:</strong> Wash immediately after use</p>
+                            <p><strong>Bed linens:</strong> Change weekly</p>
+                            <p><strong>Towels:</strong> Replace every 3-4 uses</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Food Safety & Kitchen Hygiene -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🏫</div>
-                        <h3>5–6 Years</h3>
+                        <h3><i class="fas fa-utensils"></i> Food Safety & Kitchen Hygiene</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>DPT Booster</strong>
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Food Preparation</h4>
+                            <p><strong>Hand washing:</strong> Before and during food prep</p>
+                            <p><strong>Clean surfaces:</strong> Sanitize counters and cutting boards</p>
+                            <p><strong>Separate raw foods:</strong> Avoid cross-contamination</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Polio Booster</strong>
+                        <div class="test-item">
+                            <h4>Kitchen Cleaning</h4>
+                            <p><strong>Dishes:</strong> Wash immediately or within 2 hours</p>
+                            <p><strong>Appliances:</strong> Clean regularly, especially refrigerator</p>
+                            <p><strong>Trash:</strong> Empty regularly, keep covered</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>MMR (if missed earlier)</strong>
+                        <div class="test-item">
+                            <h4>Food Storage</h4>
+                            <p><strong>Refrigeration:</strong> Keep at 40°F (4°C) or below</p>
+                            <p><strong>Leftovers:</strong> Use within 3-4 days</p>
+                            <p><strong>Pantry items:</strong> Check expiration dates regularly</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Home Environment -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🧑</div>
-                        <h3>10–16 Years</h3>
+                        <h3><i class="fas fa-home"></i> Home Environment</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Tdap Booster:</strong> Tetanus, Diphtheria, Pertussis.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Bathroom Hygiene</h4>
+                            <p><strong>Toilet:</strong> Clean weekly with disinfectant</p>
+                            <p><strong>Shower/tub:</strong> Clean weekly to prevent mold</p>
+                            <p><strong>Towels:</strong> Hang to dry, replace frequently</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>HPV (2 doses):</strong> Cervical & other cancers prevention.
+                        <div class="test-item">
+                            <h4>Bedroom Cleanliness</h4>
+                            <p><strong>Bed sheets:</strong> Change weekly</p>
+                            <p><strong>Pillows:</strong> Wash or replace regularly</p>
+                            <p><strong>Mattress:</strong> Rotate and clean periodically</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Meningococcal Vaccine:</strong> Meningitis prevention.
+                        <div class="test-item">
+                            <h4>General Cleaning</h4>
+                            <p><strong>Dusting:</strong> Weekly to reduce allergens</p>
+                            <p><strong>Vacuuming:</strong> Weekly for carpets and rugs</p>
+                            <p><strong>Air quality:</strong> Ventilate rooms, change air filters</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Special Situations -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🧓</div>
-                        <h3>Adults (≥18 Years)</h3>
+                        <h3><i class="fas fa-shield-virus"></i> Special Hygiene Situations</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Td Booster:</strong> Every 10 years (Tetanus, Diphtheria).
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>When Sick</h4>
+                            <p><strong>Isolation:</strong> Stay home to prevent spread</p>
+                            <p><strong>Frequent handwashing:</strong> Especially after coughing/sneezing</p>
+                            <p><strong>Disinfect surfaces:</strong> Clean frequently touched areas</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Influenza Vaccine:</strong> Annual flu prevention.
+                        <div class="test-item">
+                            <h4>Public Spaces</h4>
+                            <p><strong>Hand sanitizer:</strong> Use after touching public surfaces</p>
+                            <p><strong>Avoid touching face:</strong> Reduces infection risk</p>
+                            <p><strong>Mask wearing:</strong> When appropriate for protection</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis B:</strong> If not completed earlier.
+                        <div class="test-item">
+                            <h4>Travel Hygiene</h4>
+                            <p><strong>Pack essentials:</strong> Hand sanitizer, wipes, medications</p>
+                            <p><strong>Hotel rooms:</strong> Clean high-touch surfaces</p>
+                            <p><strong>Water safety:</strong> Drink bottled water if unsure of quality</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Nail and Foot Care -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👴</div>
-                        <h3>Older Adults (≥60 Years)</h3>
+                        <h3><i class="fas fa-hand-paper"></i> Nail & Foot Care</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Pneumococcal Vaccine:</strong> Pneumonia, Meningitis prevention.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Nail Hygiene</h4>
+                            <p><strong>Trimming:</strong> Keep nails short and clean</p>
+                            <p><strong>Cleaning:</strong> Remove dirt from under nails</p>
+                            <p><strong>Tools:</strong> Use clean, personal nail care tools</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Shingles Vaccine:</strong> Prevents shingles and complications.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Influenza Vaccine:</strong> Annual flu prevention.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="age-group">
-                    <div class="age-header">
-                        <div class="age-icon">🤰</div>
-                        <h3>Pregnant Women</h3>
-                    </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Tdap Vaccine:</strong> Protects mother and newborn (given in every pregnancy).
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Influenza Vaccine:</strong> Prevents maternal & infant flu risk.
+                        <div class="test-item">
+                            <h4>Foot Care</h4>
+                            <p><strong>Daily washing:</strong> Clean between toes</p>
+                            <p><strong>Dry thoroughly:</strong> Prevent fungal infections</p>
+                            <p><strong>Proper footwear:</strong> Breathable shoes and clean socks</p>
                         </div>
                     </div>
                 </div>
@@ -650,43 +695,36 @@
 
             <div class="info-section">
                 <h2 class="info-title">
-                    <i class="fas fa-info-circle"></i>
-                    Important Vaccination Guidelines
+                    <i class="fas fa-lightbulb"></i>
+                    Hygiene Tips for Success
                 </h2>
-                <ul class="info-list">
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Consult with healthcare providers before getting any vaccination
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Keep vaccination records updated and easily accessible
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Follow recommended vaccination schedules for optimal protection
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Report any adverse reactions to healthcare providers immediately
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Stay informed about vaccine updates and new recommendations
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Consider vaccination needs before traveling internationally
-                    </li>
-                </ul>
-            </div>
-
-            <div class="warning-section">
-                <div class="warning-content">
-                    <i class="fas fa-exclamation-triangle warning-icon"></i>
-                    <div class="warning-text">
-                        <strong>Important Notice:</strong> Vaccination schedules may vary by region and individual health conditions. 
-                        Consult a qualified healthcare provider for personalized advice.
+                <div class="reminder-grid">
+                    <div class="reminder-card">
+                        <h3>Building Good Habits</h3>
+                        <ul>
+                            <li>Create daily hygiene routines</li>
+                            <li>Set reminders for important tasks</li>
+                            <li>Keep hygiene supplies easily accessible</li>
+                            <li>Make hygiene practices enjoyable</li>
+                        </ul>
+                    </div>
+                    <div class="reminder-card">
+                        <h3>Product Selection</h3>
+                        <ul>
+                            <li>Choose products suitable for your skin type</li>
+                            <li>Read ingredient labels for allergies</li>
+                            <li>Replace products at appropriate intervals</li>
+                            <li>Consider eco-friendly alternatives</li>
+                        </ul>
+                    </div>
+                    <div class="reminder-card">
+                        <h3>Health Benefits</h3>
+                        <ul>
+                            <li>Prevents infections and illness</li>
+                            <li>Boosts confidence and mental health</li>
+                            <li>Improves social interactions</li>
+                            <li>Reduces risk of skin problems</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -694,22 +732,24 @@
     </div>
 
     <script>
-        // Theme toggle functionality
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
+            document.documentElement.style.transition = 'all 0.3s ease';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            
+            setTimeout(() => {
+                document.documentElement.style.transition = '';
+            }, 300);
         }
 
-        // Initialize theme from localStorage or default to light
         function initTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
         }
 
-        // Initialize theme on page load
         document.addEventListener('DOMContentLoaded', function() {
             initTheme();
         });

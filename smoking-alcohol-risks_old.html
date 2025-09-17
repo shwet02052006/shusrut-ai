@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaccination Guide - Shusrut AI Health Assistant</title>
+    <title>Smoking & Alcohol Risks - Shusrut AI Health Assistant</title>
     <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="apple-touch-icon" href="logo.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -241,14 +241,14 @@
             font-weight: 400;
         }
 
-        .vaccination-sections {
+        .info-grid, .vaccination-sections {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
-        .age-group {
+        .info-card, .age-group {
             background: var(--bg-primary);
             border-radius: 16px;
             border: 1px solid var(--border-color);
@@ -257,7 +257,7 @@
             position: relative;
         }
 
-        .age-group::before {
+        .info-card::before, .age-group::before {
             content: '';
             position: absolute;
             top: 0;
@@ -267,7 +267,7 @@
             background: var(--health-gradient);
         }
 
-        .age-group:hover {
+        .info-card:hover, .age-group:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px var(--shadow-color);
         }
@@ -300,11 +300,11 @@
             margin: 0;
         }
 
-        .vaccine-list {
+        .info-content, .vaccine-list {
             padding: 20px 25px;
         }
 
-        .vaccine-item {
+        .info-item, .vaccine-item {
             color: var(--text-secondary);
             padding: 12px 0;
             border-bottom: 1px solid var(--border-color);
@@ -312,12 +312,12 @@
             font-size: 15px;
         }
 
-        .vaccine-item:last-child {
+        .info-item:last-child, .vaccine-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
 
-        .vaccine-item strong {
+        .info-item strong, .vaccine-item strong {
             color: var(--text-primary);
             font-weight: 600;
         }
@@ -428,7 +428,7 @@
                 padding: 25px;
             }
 
-            .vaccination-sections {
+            .info-grid, .vaccination-sections {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -437,7 +437,7 @@
                 padding: 15px 20px;
             }
 
-            .vaccine-list {
+            .info-content, .vaccine-list {
                 padding: 15px 20px;
             }
 
@@ -454,11 +454,11 @@
         <header class="header">
             <div class="logo-section">
                 <div class="logo">
-                    <img src="logo.svg" alt="Shusrut AI Logo">
+                    <img src="logo.svg" alt="Shusrut AI Logo" class="logo-image">
                 </div>
                 <div class="brand-info">
-                    <h1>Vaccination Guide</h1>
-                    <p>Comprehensive vaccination information and guidance</p>
+                    <h1>Smoking & Alcohol Risks</h1>
+                    <p>Health risks and cessation resources</p>
                 </div>
             </div>
             <div class="nav-controls">
@@ -478,171 +478,174 @@
         </header>
 
         <div class="content">
-            <h1 class="page-title">Vaccination Information Center</h1>
-            <p class="subtitle">Stay protected with up-to-date vaccination information and schedules</p>
+            <h1 class="page-title">Risks of Smoking & Alcohol</h1>
+            <p class="subtitle">Understanding health risks and finding paths to healthier living</p>
 
-            <div class="vaccination-sections">
-                <div class="age-group">
+            <div class="info-grid">
+                <!-- Smoking Risks -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🍼</div>
-                        <h3>At Birth</h3>
+                        <h3><i class="fas fa-smoking-ban"></i> Smoking Health Risks</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>BCG:</strong> Protects against Tuberculosis (TB).
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Cancer Risks</h4>
+                            <p><strong>Primary:</strong> Lung cancer (85% of cases linked to smoking)</p>
+                            <p><strong>Other cancers:</strong> Throat, mouth, esophagus, bladder, kidney, pancreas</p>
+                            <p><strong>Risk reduction:</strong> Starts immediately after quitting</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis B (1st dose):</strong> Prevents Hepatitis B (liver infection).
+                        <div class="test-item">
+                            <h4>Cardiovascular Disease</h4>
+                            <p><strong>Increased risk:</strong> Heart attack, stroke, peripheral artery disease</p>
+                            <p><strong>Impact:</strong> Damages blood vessels, increases clot formation</p>
+                            <p><strong>Timeline:</strong> Heart attack risk drops 50% within 1 year of quitting</p>
+                        </div>
+                        <div class="test-item">
+                            <h4>Respiratory Problems</h4>
+                            <p><strong>Conditions:</strong> COPD, chronic bronchitis, emphysema</p>
+                            <p><strong>Symptoms:</strong> Shortness of breath, persistent cough, reduced lung function</p>
+                            <p><strong>Progression:</strong> Damage is progressive but quitting slows progression</p>
+                        </div>
+                        <div class="test-item">
+                            <h4>Other Health Effects</h4>
+                            <p><strong>Immune system:</strong> Increased infections, slower healing</p>
+                            <p><strong>Reproductive health:</strong> Fertility issues, pregnancy complications</p>
+                            <p><strong>Appearance:</strong> Premature aging, dental problems, skin damage</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Secondhand Smoke -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👶</div>
-                        <h3>6 Weeks – 6 Months</h3>
+                        <h3><i class="fas fa-users"></i> Secondhand Smoke Risks</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>DPT (3 doses):</strong> Diphtheria, Pertussis (Whooping Cough), Tetanus.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Adults Exposed to Secondhand Smoke</h4>
+                            <p><strong>Heart disease:</strong> 25-30% increased risk</p>
+                            <p><strong>Lung cancer:</strong> 20-30% increased risk</p>
+                            <p><strong>Stroke risk:</strong> Increased by 20-30%</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Polio (3 doses):</strong> Prevents Polio (paralysis).
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Hib (3 doses):</strong> Prevents Meningitis, Pneumonia.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Rotavirus (2 doses):</strong> Prevents severe Diarrhea.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>PCV (3 doses):</strong> Pneumonia, Meningitis, Sepsis.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis B (2nd & 3rd dose):</strong> Liver infection prevention.
+                        <div class="test-item">
+                            <h4>Children's Health Risks</h4>
+                            <p><strong>Respiratory:</strong> Asthma, bronchitis, pneumonia</p>
+                            <p><strong>SIDS:</strong> Increased risk of Sudden Infant Death Syndrome</p>
+                            <p><strong>Development:</strong> Slower lung growth, more ear infections</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Alcohol Risks -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👦</div>
-                        <h3>9–12 Months</h3>
+                        <h3><i class="fas fa-wine-glass"></i> Alcohol Health Risks</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>MMR (1st dose):</strong> Measles, Mumps, Rubella.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Short-term Risks</h4>
+                            <p><strong>Immediate:</strong> Impaired judgment, accidents, alcohol poisoning</p>
+                            <p><strong>Risky behaviors:</strong> Unprotected sex, violence, drunk driving</p>
+                            <p><strong>Health effects:</strong> Dehydration, hangover, digestive issues</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Varicella (1st dose):</strong> Chickenpox.
+                        <div class="test-item">
+                            <h4>Long-term Health Problems</h4>
+                            <p><strong>Liver disease:</strong> Fatty liver, hepatitis, cirrhosis</p>
+                            <p><strong>Cancer risks:</strong> Breast, liver, throat, esophagus, colorectal</p>
+                            <p><strong>Heart problems:</strong> High blood pressure, cardiomyopathy</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis A (1st dose):</strong> Liver infection prevention.
+                        <div class="test-item">
+                            <h4>Mental Health Impact</h4>
+                            <p><strong>Depression:</strong> Alcohol is a depressant affecting mood</p>
+                            <p><strong>Anxiety:</strong> Can worsen anxiety disorders</p>
+                            <p><strong>Addiction:</strong> Risk of alcohol use disorder</p>
+                        </div>
+                        <div class="test-item">
+                            <h4>Safe Drinking Guidelines</h4>
+                            <p><strong>Men:</strong> No more than 2 drinks per day</p>
+                            <p><strong>Women:</strong> No more than 1 drink per day</p>
+                            <p><strong>One drink:</strong> 12oz beer, 5oz wine, 1.5oz spirits</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Quitting Smoking -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">👧</div>
-                        <h3>16–24 Months</h3>
+                        <h3><i class="fas fa-heart"></i> Benefits of Quitting Smoking</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>DPT, Polio Boosters</strong>
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Immediate Benefits (Within hours/days)</h4>
+                            <p><strong>20 minutes:</strong> Heart rate and blood pressure drop</p>
+                            <p><strong>12 hours:</strong> Carbon monoxide levels normalize</p>
+                            <p><strong>2 weeks:</strong> Improved circulation and lung function</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>MMR (2nd dose)</strong>
+                        <div class="test-item">
+                            <h4>Long-term Benefits</h4>
+                            <p><strong>1 year:</strong> Heart disease risk cut in half</p>
+                            <p><strong>5 years:</strong> Stroke risk reduced to non-smoker levels</p>
+                            <p><strong>10 years:</strong> Lung cancer risk cut in half</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Varicella (2nd dose)</strong>
+                        <div class="test-item">
+                            <h4>Cessation Strategies</h4>
+                            <p><strong>Nicotine replacement:</strong> Patches, gum, lozenges</p>
+                            <p><strong>Medications:</strong> Prescription options available</p>
+                            <p><strong>Behavioral support:</strong> Counseling, support groups</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Alcohol Reduction -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🏫</div>
-                        <h3>5–6 Years</h3>
+                        <h3><i class="fas fa-balance-scale"></i> Reducing Alcohol Consumption</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>DPT Booster</strong>
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Strategies to Cut Back</h4>
+                            <p><strong>Set limits:</strong> Decide how many drinks per week</p>
+                            <p><strong>Alcohol-free days:</strong> Have several days per week without alcohol</p>
+                            <p><strong>Smaller portions:</strong> Use smaller glasses, dilute drinks</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Polio Booster</strong>
+                        <div class="test-item">
+                            <h4>Alternative Activities</h4>
+                            <p><strong>Social:</strong> Meet friends for coffee instead of drinks</p>
+                            <p><strong>Stress relief:</strong> Exercise, meditation, hobbies</p>
+                            <p><strong>Rewards:</strong> Find non-alcohol ways to celebrate</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>MMR (if missed earlier)</strong>
+                        <div class="test-item">
+                            <h4>When to Seek Help</h4>
+                            <p><strong>Warning signs:</strong> Can't control drinking, hiding consumption</p>
+                            <p><strong>Health problems:</strong> Physical or mental health declining</p>
+                            <p><strong>Professional help:</strong> Counseling, support groups, medical care</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="age-group">
+                <!-- Support Resources -->
+                <div class="info-card">
                     <div class="age-header">
-                        <div class="age-icon">🧑</div>
-                        <h3>10–16 Years</h3>
+                        <h3><i class="fas fa-phone"></i> Support Resources</h3>
                     </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Tdap Booster:</strong> Tetanus, Diphtheria, Pertussis.
+                    <div class="test-list">
+                        <div class="test-item">
+                            <h4>Smoking Cessation Resources</h4>
+                            <p><strong>National Quitline:</strong> 1-800-QUIT-NOW (1-800-784-8669)</p>
+                            <p><strong>Apps:</strong> QuitNow, Smoke Free, QuitGuide</p>
+                            <p><strong>Website:</strong> smokefree.gov</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>HPV (2 doses):</strong> Cervical & other cancers prevention.
+                        <div class="test-item">
+                            <h4>Alcohol Support Resources</h4>
+                            <p><strong>SAMHSA Helpline:</strong> 1-800-662-HELP (4357)</p>
+                            <p><strong>AA Meetings:</strong> Alcoholics Anonymous meetings</p>
+                            <p><strong>Apps:</strong> Sober Grid, I Am Sober, EasyQuit Drinking</p>
                         </div>
-                        <div class="vaccine-item">
-                            <strong>Meningococcal Vaccine:</strong> Meningitis prevention.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="age-group">
-                    <div class="age-header">
-                        <div class="age-icon">🧓</div>
-                        <h3>Adults (≥18 Years)</h3>
-                    </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Td Booster:</strong> Every 10 years (Tetanus, Diphtheria).
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Influenza Vaccine:</strong> Annual flu prevention.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Hepatitis B:</strong> If not completed earlier.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="age-group">
-                    <div class="age-header">
-                        <div class="age-icon">👴</div>
-                        <h3>Older Adults (≥60 Years)</h3>
-                    </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Pneumococcal Vaccine:</strong> Pneumonia, Meningitis prevention.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Shingles Vaccine:</strong> Prevents shingles and complications.
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Influenza Vaccine:</strong> Annual flu prevention.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="age-group">
-                    <div class="age-header">
-                        <div class="age-icon">🤰</div>
-                        <h3>Pregnant Women</h3>
-                    </div>
-                    <div class="vaccine-list">
-                        <div class="vaccine-item">
-                            <strong>Tdap Vaccine:</strong> Protects mother and newborn (given in every pregnancy).
-                        </div>
-                        <div class="vaccine-item">
-                            <strong>Influenza Vaccine:</strong> Prevents maternal & infant flu risk.
+                        <div class="test-item">
+                            <h4>Healthcare Provider Support</h4>
+                            <p><strong>Primary care:</strong> Discuss with your doctor</p>
+                            <p><strong>Specialists:</strong> Addiction medicine specialists</p>
+                            <p><strong>Mental health:</strong> Counselors and therapists</p>
                         </div>
                     </div>
                 </div>
@@ -650,43 +653,36 @@
 
             <div class="info-section">
                 <h2 class="info-title">
-                    <i class="fas fa-info-circle"></i>
-                    Important Vaccination Guidelines
+                    <i class="fas fa-lightbulb"></i>
+                    Tips for Success
                 </h2>
-                <ul class="info-list">
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Consult with healthcare providers before getting any vaccination
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Keep vaccination records updated and easily accessible
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Follow recommended vaccination schedules for optimal protection
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Report any adverse reactions to healthcare providers immediately
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Stay informed about vaccine updates and new recommendations
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Consider vaccination needs before traveling internationally
-                    </li>
-                </ul>
-            </div>
-
-            <div class="warning-section">
-                <div class="warning-content">
-                    <i class="fas fa-exclamation-triangle warning-icon"></i>
-                    <div class="warning-text">
-                        <strong>Important Notice:</strong> Vaccination schedules may vary by region and individual health conditions. 
-                        Consult a qualified healthcare provider for personalized advice.
+                <div class="reminder-grid">
+                    <div class="reminder-card">
+                        <h3>Quitting Smoking</h3>
+                        <ul>
+                            <li>Set a quit date and tell others</li>
+                            <li>Remove all smoking materials from home</li>
+                            <li>Identify and avoid triggers</li>
+                            <li>Reward yourself for milestones</li>
+                        </ul>
+                    </div>
+                    <div class="reminder-card">
+                        <h3>Reducing Alcohol</h3>
+                        <ul>
+                            <li>Keep a drinking diary</li>
+                            <li>Find new ways to socialize</li>
+                            <li>Practice saying "no" to drinks</li>
+                            <li>Focus on health benefits of cutting back</li>
+                        </ul>
+                    </div>
+                    <div class="reminder-card">
+                        <h3>Building Support</h3>
+                        <ul>
+                            <li>Tell friends and family about your goals</li>
+                            <li>Join support groups or online communities</li>
+                            <li>Work with healthcare professionals</li>
+                            <li>Be patient with yourself during the process</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -694,22 +690,24 @@
     </div>
 
     <script>
-        // Theme toggle functionality
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
+            document.documentElement.style.transition = 'all 0.3s ease';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            
+            setTimeout(() => {
+                document.documentElement.style.transition = '';
+            }, 300);
         }
 
-        // Initialize theme from localStorage or default to light
         function initTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
         }
 
-        // Initialize theme on page load
         document.addEventListener('DOMContentLoaded', function() {
             initTheme();
         });
